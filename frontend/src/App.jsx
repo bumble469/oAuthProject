@@ -4,13 +4,14 @@ import './App.css'
 import LoginPage from './pages/login'
 import DashboardPage from './pages/dashboard'
 import apiUri from './api/axios';
+import apiRefresh from './api/refresh';
 
 function App() {
   const [loading, setLoading] = useState(true);
   const [isAuth, setIsAuth] = useState(false);
 
   useEffect(() => {
-    apiUri.get('/me').then(() => {
+    apiRefresh(() => apiUri.get('/me')).then(() => {
       setIsAuth(true)
     }).catch(() => {
       setIsAuth(false)
